@@ -5,36 +5,58 @@ interface Props {
   rows: Project[];
   max: number;
 }
+
 const ListWorks: FunctionalComponent<Props> = ({ rows, max }) => {
   const projects = rows.slice(0, max).map((project: Project) => (
-    <Works {...project} />
+    <Works key={project.id} {...project} />
   ));
-  return max < 10
-    ? <ul class="mx-0">{projects}</ul>
-    : <ul class="mx-0 grid grid-cols-1 md:grid-cols-2 gap-4">{projects}</ul>;
+  const featured = max <= 4;
+  return featured
+    ? <ul class="grid list-none gap-5 p-0 sm:grid-cols-2">{projects}</ul>
+    : (
+      <ul class="grid list-none gap-5 p-0 sm:grid-cols-2">
+        {projects}
+      </ul>
+    );
 };
 
-const Works = ({ id, image, title }: Project) => {
+const Works = ({ id, image, title, excerpt }: Project) => {
   return (
     <li class="list-none">
-      <a href={`/proyectos/${id}`}>
-        <article class="py-2 px-3 my-4 w-full">
+      <a
+        href={`/proyectos/${id}`}
+        class="glass glass-card group flex h-full flex-col overflow-hidden rounded-2xl transition duration-200 hover:-translate-y-1 hover:shadow-lg"
+      >
+        <div class="overflow-hidden">
           <picture>
             <source srcset={`/projects/${image}.avif`} type="image/avif" />
             <img
               src={`/projects/${image}.webp`}
-              className="rounded-lg cover my-1"
-              alt={image}
-              width="1440"
-              height="720"
+              class="aspect-[16/9] w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+              alt={`Captura del proyecto ${title}`}
+              width="640"
+              height="360"
+              loading="lazy"
+              decoding="async"
             />
           </picture>
-          <span class="font-medium mt-2 leading-normal">
+        </div>
+        <div class="flex flex-1 flex-col gap-1.5 p-4">
+          <h3 class="text-[15px] font-semibold leading-snug tracking-tight">
             {title}
+          </h3>
+          {excerpt && excerpt !== "This is my first post" && (
+            <p class="line-clamp-2 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+              {excerpt}
+            </p>
+          )}
+          <span class="mt-auto inline-flex items-center gap-1 pt-2 text-sm font-medium text-gray-700 transition group-hover:gap-2 dark:text-gray-300">
+            Ver caso <span aria-hidden="true">→</span>
           </span>
-        </article>
+        </div>
       </a>
     </li>
   );
 };
+
 export default ListWorks;

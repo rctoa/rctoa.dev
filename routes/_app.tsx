@@ -1,76 +1,50 @@
 import { define } from "../utils.ts";
 
-export default define.page((ctx) => {
-  const description =
-    "Artículos y tutoriales especializados en Frontend, Backend y rendimiento web. Potencia tu proyecto digital con nuestras recomendaciones. ¡Embárcate en el viaje hacia la excelencia en el desarrollo web!";
-  const title =
-    "Roberto Toalongo 🍐 | Más Allá del Código: Buenas Prácticas en Desarrollo Web";
+const SITE_URL = "https://rctoa.dev";
+const SITE_NAME = "Roberto Toalongo";
+const TITLE = "Roberto Toalongo — Desarrollador de Software";
+const DESCRIPTION =
+  "Soy Roberto Toalongo, desarrollador de software con 6 años de experiencia. Comparto mis proyectos, notas sobre desarrollo web y formas de contactarme.";
 
+export default define.page((ctx) => {
   return (
     <html lang="es">
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <title>{title}</title>
-        <meta name="description" content={description} />
+        <title>{TITLE}</title>
+        <meta name="description" content={DESCRIPTION} />
+        <link rel="canonical" href={SITE_URL + ctx.url.pathname} />
+        <meta name="author" content="Roberto Toalongo" />
+        <meta name="theme-color" content="#282828" />
+        <meta name="view-transition" content="same-origin" />
         <meta property="og:locale" content="es_ES" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
+        <meta property="og:site_name" content={SITE_NAME} />
+        <meta property="og:title" content={TITLE} />
+        <meta property="og:description" content={DESCRIPTION} />
         <meta property="og:type" content="website" />
-        {/* <meta property="og:url" content="https://rcraftoa.dev" >*/}
-        <meta property="og:site_name" content="Roberto Toalongo" />
-        <meta name="author" content="rcraftoa" />
+        <meta property="og:url" content={SITE_URL + ctx.url.pathname} />
+        <meta
+          property="og:image"
+          content={`${SITE_URL}/favicon/android-icon-192x192.png`}
+        />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={TITLE} />
+        <meta name="twitter:description" content={DESCRIPTION} />
         <link
-          rel="apple-touch-icon"
-          sizes="57x57"
-          href="/favicon/apple-icon-57x57.png"
+          rel="preconnect"
+          href="https://fonts.googleapis.com"
         />
         <link
-          rel="apple-touch-icon"
-          sizes="60x60"
-          href="/favicon/apple-icon-60x60.png"
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin="anonymous"
         />
         <link
-          rel="apple-touch-icon"
-          sizes="72x72"
-          href="/favicon/apple-icon-72x72.png"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
         />
-        <link
-          rel="apple-touch-icon"
-          sizes="76x76"
-          href="/favicon/apple-icon-76x76.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="114x114"
-          href="/favicon/apple-icon-114x114.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="120x120"
-          href="/favicon/apple-icon-120x120.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="144x144"
-          href="/favicon/apple-icon-144x144.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="152x152"
-          href="/favicon/apple-icon-152x152.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/favicon/apple-icon-180x180.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="192x192"
-          href="/favicon/android-icon-192x192.png"
-        />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link
           rel="icon"
           type="image/png"
@@ -80,23 +54,34 @@ export default define.page((ctx) => {
         <link
           rel="icon"
           type="image/png"
-          sizes="96x96"
-          href="/favicon/favicon-96x96.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
           sizes="16x16"
           href="/favicon/favicon-16x16.png"
         />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/favicon/apple-icon-180x180.png"
+        />
         <link rel="manifest" href="/favicon/manifest.json" />
-        <meta name="msapplication-TileColor" content="#ffffff" />
-        <meta
-          name="msapplication-TileImage"
-          content="/favicon/ms-icon-144x144.png"
+        <script
+          type="application/ld+json"
+          // deno-lint-ignore react-no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Roberto Toalongo",
+              url: SITE_URL,
+              jobTitle: "Desarrollador de Software",
+              sameAs: [
+                "https://github.com/rctoa",
+                "https://www.linkedin.com/in/roberto-toalongo-galabay-1836471b5",
+              ],
+            }),
+          }}
         />
       </head>
-      <body class="bg-gruvbox w-full text-black dark:bg-gruvbox-dark dark:text-white">
+      <body class="bg-gruvbox w-full min-h-screen flex flex-col text-gray-900 antialiased dark:bg-gruvbox-dark dark:text-gray-100">
         <ctx.Component />
       </body>
     </html>

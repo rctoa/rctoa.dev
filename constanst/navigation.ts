@@ -1,10 +1,10 @@
 export const navbarLinks = [
   {
-    label: "About",
+    label: "Sobre mí",
     href: "/p/sobre-mi",
   },
   {
-    label: "Articulos",
+    label: "Artículos",
     href: "/blog",
   },
   {
@@ -15,15 +15,26 @@ export const navbarLinks = [
 
 export const footerLinks = [
   {
-    label: "Contacto",
-    to: "/",
+    label: "Sobre mí",
+    to: "/p/sobre-mi",
   },
   {
-    label: "Github",
-    to: "/",
+    label: "Artículos",
+    to: "/blog",
   },
   {
-    label: "Twitter",
-    to: "/",
+    label: "Proyectos",
+    to: "/proyectos",
+  },
+];
+
+export const socialLinks = [
+  {
+    label: "GitHub",
+    to: "https://github.com/rctoa",
+  },
+  {
+    label: "LinkedIn",
+    to: "https://www.linkedin.com/in/roberto-toalongo-galabay-1836471b5",
   },
 ];

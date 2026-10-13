@@ -21,8 +21,18 @@ const ToggleButton = () => {
 
   const toggleTheme = () => {
     const t = theme.value === "light" ? "dark" : "light";
-    localStorage.setItem("theme", t);
-    theme.value = t;
+    const apply = () => {
+      localStorage.setItem("theme", t);
+      theme.value = t;
+    };
+    const doc = globalThis.document as Document & {
+      startViewTransition?: (cb: () => void) => void;
+    };
+    if (typeof doc?.startViewTransition === "function") {
+      doc.startViewTransition(apply);
+    } else {
+      apply();
+    }
   };
 
   useLayoutEffect(() => {
@@ -39,7 +49,7 @@ const ToggleButton = () => {
       <button
         type="button"
         onClick={toggleTheme}
-        class="flex justify-center items-center dark:bg-[#ffdf9a] dark:hover:bg-[#eeca7a] p-2 rounded-lg bg-[#aa8ee4] hover:bg-[#8b71c4] w-9 h-9 focus:outline-none"
+        class="glass flex h-9 w-9 items-center justify-center rounded-full p-2 focus:outline-none"
         aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
       >
         {!theme.value ? <span /> : isDark ? <SunIcon /> : <MoonIcon />}

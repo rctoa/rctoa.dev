@@ -6,45 +6,53 @@ interface Props {
   max: number;
 }
 
-interface TagImages {
-  [key: string]: string;
-}
-
-export const TAGS_IMAGES_DEFAULT = "/tags/brain.svg";
-export const TAGS_IMAGES: TagImages = {
-  node: "/tags/node.svg",
-  brain: "/tags/brain.svg",
-  react: "/tags/react.svg",
-  java: "/tags/java.svg",
-  kotlin: "/tags/kotlin.svg",
-};
-
 const ListArticle: FunctionComponent<Props> = ({ rows, max }) => {
   const articles = rows
     .slice(0, max)
     .map((post: Post) => <Article key={post.id} {...post} />);
-  return <ul className="mx-0">{articles}</ul>;
+  return <ul class="m-0 flex flex-col gap-2 p-0">{articles}</ul>;
 };
 
-const Article = ({ id, title, date, tags }: Post) => {
-  const nameTag = tags[0];
-  const tag = TAGS_IMAGES[nameTag] || TAGS_IMAGES_DEFAULT;
+function formatDate(date: Date) {
+  return Intl.DateTimeFormat("es", { dateStyle: "long" }).format(date);
+}
+
+const Article = ({ id, title, date, excerpt, tags }: Post) => {
   return (
-    <li className="list-none">
-      <a href={`/blog/${id}`} className="group">
-        <article class="flex flex-row py-3 px-2 gap-4 my-4 w-full">
-          <div class="flex items-center justify-center">
-            <img src={tag} alt="tag" width={50} height={50} />
-          </div>
-          <div>
-            <span class="block font-medium dark:text-white leading-5 group-hover:underline">
-              {title}
-            </span>
-            <time class="font-light text-xs">
-              {Intl.DateTimeFormat("es", { dateStyle: "long" }).format(date)}
+    <li class="list-none">
+      <a
+        href={`/blog/${id}`}
+        class="group flex items-start justify-between gap-4 rounded-2xl border border-transparent px-4 py-3.5 transition hover:border-black/10 hover:bg-white/70 dark:hover:border-white/10 dark:hover:bg-white/5"
+      >
+        <div class="min-w-0">
+          <div class="flex flex-wrap items-center gap-2 text-xs">
+            <time
+              dateTime={new Date(date).toISOString()}
+              class="text-gray-500 dark:text-gray-400"
+            >
+              {formatDate(new Date(date))}
             </time>
+            {tags && (
+              <span class="rounded-full border border-black/10 px-2 py-0.5 font-medium uppercase tracking-wide text-gray-600 dark:border-white/15 dark:text-gray-400">
+                {Array.isArray(tags) ? tags[0] : tags}
+              </span>
+            )}
           </div>
-        </article>
+          <h3 class="mt-1.5 text-[15px] font-semibold leading-snug tracking-tight group-hover:underline group-hover:underline-offset-4">
+            {title}
+          </h3>
+          {excerpt && !excerpt.startsWith("This is my") && (
+            <p class="mt-1 line-clamp-1 text-sm text-gray-600 dark:text-gray-400">
+              {excerpt}
+            </p>
+          )}
+        </div>
+        <span
+          aria-hidden="true"
+          class="mt-1 shrink-0 text-gray-400 transition group-hover:translate-x-1 group-hover:text-black dark:group-hover:text-white"
+        >
+          →
+        </span>
       </a>
     </li>
   );

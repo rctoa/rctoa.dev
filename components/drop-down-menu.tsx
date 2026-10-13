@@ -1,35 +1,37 @@
 import { FunctionComponent } from "preact";
-import { DropdownMenuProps } from ".//menu.tsx";
+import { DropdownMenuProps } from "./menu.tsx";
 
 const DropdownMenu: FunctionComponent<DropdownMenuProps> = ({ menuItems }) => {
   return (
     <div className="block sm:hidden">
-      <div className="dropdown dropdown-bottom dropdown-end">
-        <div
-          role="button"
-          tabIndex={0}
-          className="p-1 w-9 h-9"
-          aria-label="Menu de navegación"
+      <details className="dropdown dropdown-bottom dropdown-end">
+        <summary
+          className="flex size-9 cursor-pointer list-none items-center justify-center rounded-full transition hover:bg-black/5 dark:hover:bg-white/10 [&::-webkit-details-marker]:hidden"
+          aria-label="Abrir menú de navegación"
         >
           <MenuIcon />
-        </div>
-        <ul
-          tabIndex={-1}
-          className={`dropdown-content menu px-0 py-2 mt-2 w-56 bg-white dark:bg-[#1d1817] rounded-lg shadow-lg`}
-        >
+        </summary>
+        <ul className="dropdown-content menu mt-2 w-52 rounded-2xl border border-black/10 bg-white p-2 shadow-xl dark:border-white/10 dark:bg-[#1d1d1d]">
           {menuItems.map(({ href, label }) => (
-            <li>
+            <li key={href}>
               <a
                 href={href}
-                className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-[#ffffff10]"
-                key={href}
+                className="rounded-xl px-4 py-2.5 text-sm font-medium"
               >
                 {label}
               </a>
             </li>
           ))}
+          <li>
+            <a
+              href="/p/sobre-mi"
+              className="mt-1 rounded-xl bg-neutral-900 px-4 py-2.5 text-sm font-semibold text-white dark:bg-white dark:text-neutral-900"
+            >
+              Contacto →
+            </a>
+          </li>
         </ul>
-      </div>
+      </details>
     </div>
   );
 };
@@ -37,8 +39,11 @@ const DropdownMenu: FunctionComponent<DropdownMenuProps> = ({ menuItems }) => {
 const MenuIcon = () => (
   <svg
     viewBox="0 0 24 24"
+    width="20"
+    height="20"
     className="dark:fill-white fill-current"
     xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
   >
     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
     <g
