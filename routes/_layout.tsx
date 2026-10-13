@@ -55,7 +55,7 @@ function Footer() {
             <span class="text-base font-bold">Roberto Toalongo</span>
           </a>
           <p class="mt-3 max-w-xs text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Desarrollador de software. Notas, proyectos y formas de contacto.
+            Desarrollador de software. Notas y proyectos.
           </p>
           <div class="mt-4">
             <Social />
@@ -101,6 +101,14 @@ function Footer() {
                 rel="noopener noreferrer"
               >
                 LinkedIn
+              </a>
+            </li>
+            <li>
+              <a
+                class="text-gray-700 hover:underline hover:underline-offset-4 dark:text-gray-300"
+                href="mailto:robertotoalongo01@gmail.com"
+              >
+                Email
               </a>
             </li>
           </ul>

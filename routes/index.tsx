@@ -119,21 +119,6 @@ export default define.page<typeof handler>(function Home(props) {
         <ListArticle rows={posts} max={5} />
       </section>
 
-      {/* CONTACTO SOBRIO */}
-      <section
-        aria-label="Contacto"
-        class="glass rounded-3xl px-6 py-8 sm:px-10"
-      >
-        <h2 class="text-xl font-bold tracking-tight">Contacto</h2>
-        <p class="mt-2 max-w-lg text-[15px] leading-relaxed text-gray-600 dark:text-gray-400">
-          Si hay algo puntual en lo que crees que puedo aportar, puedes
-          escribirme por LinkedIn o revisar mi código en GitHub. Respondo cuando
-          tengo disponibilidad.
-        </p>
-        <div class="mt-4">
-          <Social />
-        </div>
-      </section>
     </div>
   );
 });
